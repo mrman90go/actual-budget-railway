@@ -29,6 +29,7 @@ app.get("/accounts", async (_req, res) => {
     const accounts = await api.getAccounts();
     res.json(accounts.map(({ id, name, balance, closed }) => ({ id, name, balance, closed })));
   } catch (error) {
+    console.error("Actual bridge connection failed:", error instanceof Error ? error.message : error);
     res.status(503).json({ error: "Actual bridge is not configured" });
   }
 });
