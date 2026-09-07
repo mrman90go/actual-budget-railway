@@ -11,8 +11,9 @@ async function connect() {
     password: process.env.ACTUAL_PASSWORD,
   });
   const budgets = await api.getBudgets();
-  if (!budgets.length) throw new Error("No Actual budget found");
-  await api.downloadBudget(budgets[0].syncId);
+  const budgetId = process.env.ACTUAL_BUDGET_ID || budgets[0]?.syncId || budgets[0]?.id;
+  if (!budgetId) throw new Error("No Actual budget sync ID configured");
+  await api.downloadBudget(budgetId);
   ready = true;
 }
 
