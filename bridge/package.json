@@ -1,0 +1,12 @@
+{
+  "name": "actual-chat-bridge",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node bridge/server.js"
+  },
+  "dependencies": {
+    "@actual-app/api": "latest",
+    "express": "latest"
+  }
+}
