@@ -18,6 +18,11 @@ async function connect() {
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
+app.use((req, res, next) => {
+  if (req.get("X-API-Key") !== process.env.BRIDGE_API_KEY) return res.status(401).json({ error: "Unauthorized" });
+  next();
+});
+
 app.get("/accounts", async (_req, res) => {
   try {
     await connect();
