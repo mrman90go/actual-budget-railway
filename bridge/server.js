@@ -16,10 +16,7 @@ async function connect() {
   ready = true;
 }
 
-app.get("/health", async (_req, res) => {
-  try { await connect(); res.json({ ok: true }); }
-  catch (error) { res.status(503).json({ ok: false }); }
-});
+app.get("/health", (_req, res) => res.json({ ok: true }));
 
 app.get("/accounts", async (_req, res) => {
   try {
